@@ -16,6 +16,14 @@ const bool digits[] = {
   X,X,X,  _,X,_,  X,X,X,  X,X,X,  _,_,X,  X,X,X,  X,X,X,  _,X,_,  X,X,X,  X,X,_
 };
 
+const bool letters[] = {
+  X,X,X,X,X,
+  X,_,_,_,_,
+  X,X,X,X,X,
+  X,_,_,_,_,
+  X,_,_,_,_,
+};
+
 void setup() {
     pinMode(buttonpin, INPUT);
     FastLED.addLeds < WS2812B, ledpin, GRB > (leds, numleds);
@@ -32,19 +40,39 @@ void countdown(unsigned int seconds, CRGB color) {
 		int first  = n / 10;
 		int second = n % 10;
 
-		for (int i = 0; i < numleds; i++) leds[i] = CRGB::Black;
+		for (int i = 0; i < numleds; i++) {
+			leds[i] = CRGB::Black;
+		}
 
 		for (int y = 0; y < 5; y++) {
-		if (first) leds[y*5] = color;  // digit 1 or nothing
+			if (first) {
+				leds[y*5] = color;  // digit 1 or nothing
+			}
 
-		for (int x = 0; x < 3; x++) {
-		if (digits[y*30 + second*3 + x]) leds[y*5 + first + 1 + x] = color;
-		}
+			for (int x = 0; x < 3; x++) {
+				if (digits[y*30 + second*3 + x]) {
+					leds[y*5 + first + 1 + x] = color;
+				}
+			}
 		}
 		FastLED.show();
 
 		delay(1000);
 	}
+}
+
+void finished() {
+	for (unsigned int i = 0; i < numleds; i++) {
+		leds[i] = CRGB::Black;
+	}
+
+	for (unsigned int i = 0; i < numleds; i++) {
+		if (letters[i]) {
+			leds[i] = CRGB::Green;
+		}
+	}
+
+	FastLED.show();
 }
 
 void loop() {
@@ -57,5 +85,7 @@ void loop() {
 			// Cooldown
 			countdown(10, CRGB::Blue);
 		}
+		// Finish
+		finished();
 	}
 }
