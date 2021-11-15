@@ -87,7 +87,7 @@ void loop() {
 			shownumber(sets, CRGB::Cyan);	
 			delay(1000);
 			// Row
-			countdown(20, CRGB::Red);
+			countdown(15, CRGB::Red);
 			// Cooldown
 			countdown(10, CRGB::Blue);
 		}
