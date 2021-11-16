@@ -81,13 +81,13 @@ void finished() {
 void loop() {
 	if (digitalRead(buttonpin) == LOW) {
 		// Start
-		countdown(10, CRGB::Green);
+		countdown(15, CRGB::Green);
 		for (unsigned int sets = 10; sets > 0; sets--) {
 			// Show current sets
 			shownumber(sets, CRGB::Cyan);	
 			delay(1000);
 			// Row
-			countdown(15, CRGB::Red);
+			countdown(20, CRGB::Red);
 			// Cooldown
 			countdown(10, CRGB::Blue);
 		}
