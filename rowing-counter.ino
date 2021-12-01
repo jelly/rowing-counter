@@ -6,6 +6,12 @@ const int buttonpin = 39;
 const int ledpin = 27;
 const int numleds = 25;
 
+// Rowing settings
+const unsigned int minutes = 5;
+const unsigned int seconds = minutes * 60;
+const unsigned int rowtime = 20;
+const unsigned int rowsets = seconds / rowtime;
+
 CRGB leds[numleds];
 
 const bool digits[] = {
@@ -82,7 +88,7 @@ void loop() {
 	if (digitalRead(buttonpin) == LOW) {
 		// Start
 		countdown(15, CRGB::Green);
-		for (unsigned int sets = 10; sets > 0; sets--) {
+		for (unsigned int sets = rowsets; sets > 0; sets--) {
 			// Show current sets
 			shownumber(sets, CRGB::Cyan);	
 			delay(1000);
