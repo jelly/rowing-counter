@@ -7,7 +7,7 @@ const int ledpin = 27;
 const int numleds = 25;
 
 // Rowing settings
-const unsigned int minutes = 5;
+const unsigned int minutes = 10;
 const unsigned int seconds = minutes * 60;
 const unsigned int rowtime = 20;
 const unsigned int rowsets = seconds / rowtime;
