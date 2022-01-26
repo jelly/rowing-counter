@@ -7,7 +7,7 @@ const int ledpin = 27;
 const int numleds = 25;
 
 // Rowing settings
-const unsigned int minutes = 10;
+const unsigned int minutes = 15;
 const unsigned int seconds = minutes * 60;
 const unsigned int rowtime = 20;
 const unsigned int rowsets = seconds / rowtime;
@@ -90,12 +90,20 @@ void loop() {
 		countdown(15, CRGB::Green);
 		for (unsigned int sets = rowsets; sets > 0; sets--) {
 			// Show current sets
-			shownumber(sets, CRGB::Cyan);	
+			if (sets > 19) {
+				 unsigned int lower = sets % 10;
+				 unsigned int higher = sets / 10;
+				shownumber(higher, CRGB::Cyan);	
+				delay(500);
+				shownumber(lower, CRGB::Blue);	
+			} else {
+				shownumber(sets, CRGB::Cyan);	
+			}
 			delay(1000);
 			// Row
 			countdown(20, CRGB::Red);
 			// Cooldown
-			countdown(10, CRGB::Blue);
+			countdown(10, CRGB::DarkBlue);
 		}
 		// Finish
 		finished();
